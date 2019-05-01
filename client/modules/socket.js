@@ -27,6 +27,9 @@ export class Socket {
     emitConfirmation = value => {
         this.socket.emit('confirm',value)
     };
+    emitChangingName = name => {
+        this.socket.emit('change name',name)
+    };
     onStopTyping = handler => this.socket.on('stop typing', handler);
     emitStopTyping = () => this.socket.emit('stop typing');
 

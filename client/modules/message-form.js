@@ -21,7 +21,7 @@ export class MessageForm {
             event.preventDefault();
 
             if(this.input.value) {
-                messages.renderMessage(data1, 'me', this.input.value, this.status);
+                messages.renderMessage('', 'me', this.input.value, this.status);
                 handler(this.input.value);
                 this.input.value='';
             }

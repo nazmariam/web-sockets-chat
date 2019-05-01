@@ -17,7 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
       username.render(name);
       messages.renderSystemMessage(data,`${name} assigned to you`);
       userList.render(users);
+      username.onSubmit(()=>{
+          let newName = document.getElementById('username').value;
+          socket.emitChangingName(newName)})
       return name1 = name;
+
   });
     socket.onUserJoined(({data,name, users}) => {
         messages.renderSystemMessage(data,`${name} joined`);
@@ -36,8 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     socket.onSent((value)=>{
         let nodes = document.querySelectorAll('.status');
-        let last =nodes[nodes.length-1];
-        last.innerHTML=value.status;
+        let last = nodes[nodes.length-1];
+        if(last){last.innerHTML=value.status}
+        let timeHosts = document.querySelectorAll('.my-time');
+        let lastMy = timeHosts[timeHosts.length-1];
+        if(lastMy){lastMy.innerHTML=value.data}
     });
     messageForm.onSubmit(socket.emitChatMessage,name1);
 

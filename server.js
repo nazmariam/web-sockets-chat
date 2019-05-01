@@ -33,6 +33,25 @@ io.on('connection', socket=>{
     });
   };
   socket.username = Moniker.choose();
+  socket.on('change name',newName => {
+    let oldName = socket.username;
+    socket.username = newName;
+    socket.emit('set username',{
+      name: socket.username,
+      data: currentTime(),
+      users: getList(),
+    });
+    socket.broadcast.emit('user left', {
+      name:oldName,
+      data: currentTime(),
+      users: getList(),
+    });
+    socket.broadcast.emit('user joined', {
+      name:socket.username,
+      data: currentTime(),
+      users: getList(),
+    });
+  });
   socket.emit('set username',{
     name: socket.username,
     data: currentTime(),
@@ -58,6 +77,7 @@ io.on('connection', socket=>{
 
     socket.emit('status',{
       status:'sent',
+      data:currentTime()
     });
 
     socket.broadcast.emit('chat message', {
@@ -69,7 +89,7 @@ io.on('connection', socket=>{
   );
 
   socket.on('confirm',ct=>{
-    io.to(ct).emit('status',{status:'seen'});
+    io.to(ct).emit('status',{status:'seen',data:currentTime()});
   });
   socket.on('typing', () => socket.broadcast.emit('typing', {name: socket.username}));
   socket.on('stop typing', () => socket.broadcast.emit('stop typing', {name: socket.username}));

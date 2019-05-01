@@ -5,7 +5,7 @@ export class Messages{
     renderMessage = (data, username, message, status) =>{
         const messageHeight = document.getElementById('messages');
         if(username==='me'){
-            this.node.innerHTML += `<p><strong>[me]: ${message}</strong><span class="time"> ${data}</span>&nbsp;<span class="time status">${status}</span></p>`;
+            this.node.innerHTML += `<p><strong>[me]: ${message}</strong>&nbsp;<span class="time my-time"> ${data}</span>&nbsp;<span class="time status">${status}</span></p>`;
         }else{
             this.node.innerHTML += `<p>[${username}]: ${message} <span class="time"> ${data}</span></p>`;
         }
