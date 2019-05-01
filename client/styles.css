@@ -93,7 +93,9 @@ button, input {
 .online{
 	/*height: 50%;*/
 }
-
+#usernameForm, h4{
+	margin:0 0 8px;
+}
 .room-list{
 	height: 50%;
 }
