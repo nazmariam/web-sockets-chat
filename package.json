@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "socket-io chat example",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "moniker": "^0.1.2",
     "socket.io": "2.4.0"
   },
